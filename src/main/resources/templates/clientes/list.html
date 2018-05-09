@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	layout:decorate="~{layout}">
-
 <head>
 	<title>Clientes</title>
 </head>
-
 <body>
 	
 	<h1 layout:fragment="header">Lista de Clientes</h1>
 	
-	<div layout:fragment="content" class="container">
+	<div layout:fragment="content">
 		
-		<a href="form.html" th:href="@{/clientes/novo}">Novo cliente</a>
+		<a th:href="@{/clientes/novo}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Novo cliente</a>
 		<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">mensagem</div>
 		
-		<table class="table table-bordered table-striped">
-			<thead>
+		<table class="table">
+			<thead class="thead-light">
 				<tr>
-					<td>ID</td>
-					<td>Nome</td>
+					<th scope="col">ID</th>
+					<th scope="col">Nome</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +26,7 @@
 				</tr>
 				
 				<tr th:each="cliente : ${clientes}">
-					<td th:text="${cliente.id}">1</td>
+					<th scope="row" th:text="${cliente.id}">1</th>
 					<td><a href="view.html" th:href="@{'/clientes/'+${cliente.id}}" th:text="${cliente.nome}"> nome </a></td>
 				</tr>
 			</tbody>
@@ -38,5 +35,4 @@
 	</div>
 	
 </body>
-
 </html>
