@@ -1,1 +1,1 @@
-web: java -jar target/logistica-1.0.jar
+web: java -jar target/logistica-1.0.jar --spring.config.location=classpath:heroku-db.properties
