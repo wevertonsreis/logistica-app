@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout}">
+<head>
+	<title>Veículos</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Lista de Veículos</h1>
+	
+	<div layout:fragment="content">
+		
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Placa</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${veiculos.empty}">
+					<td colspan="3">Sem veículos</td>
+				</tr>
+				
+				<tr th:each="veiculo : ${veiculos}">
+					<th scope="row" th:text="${veiculo.id}">1</th>
+					<td><a th:href="@{'/veiculos/'+${veiculo.id}}" th:text="${veiculonome}"></a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+	
+</body>
+</html>

@@ -12,8 +12,10 @@ import javax.persistence.ManyToOne;
 public class Veiculo extends GenericEntity {
 	
 	private String placa;
+	
 	@ManyToOne
 	private Motorista motorista;
+	
 	@ManyToMany
 	@JoinTable(name = "vaiculo_localizacao", 
 		joinColumns = { @JoinColumn(name = "veiculo_id") }, 
@@ -43,5 +45,5 @@ public class Veiculo extends GenericEntity {
 	public void setLocalizacoes(List<Localizacao> localizacoes) {
 		this.localizacoes = localizacoes;
 	}
-
+	
 }
