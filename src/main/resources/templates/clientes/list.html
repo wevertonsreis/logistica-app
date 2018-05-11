@@ -10,7 +10,7 @@
 	
 	<div layout:fragment="content">
 		
-		<a th:href="@{/clientes/novo}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Novo cliente</a>
+		<a th:href="@{/clientes/novo}" class="btn btn-primary btn-lg active btn-block mb-1" role="button" aria-pressed="true">Novo cliente</a>
 		<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">mensagem</div>
 		
 		<table class="table">

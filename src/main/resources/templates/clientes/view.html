@@ -13,29 +13,29 @@
 	
 	<div layout:fragment="content" class="well">
 		
-		<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">mensagem</div>
+		<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}"></div>
 			
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Nome</th>
-					<th>Endereço</th>
+					<th>EndereÃ§o</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td id="id" th:text="${cliente.id}">123</td>
-					<td id="nome" th:text="${cliente.nome}">nome</td>
-					<td id="endereco" th:text="${cliente.endereco}">endereco</td>
+					<td id="id" th:text="${cliente.id}"></td>
+					<td id="nome" th:text="${cliente.nome}"></td>
+					<td id="endereco" th:text="${cliente.endereco}"></td>
 				</tr>
 			</tbody>
 		</table>
 		
 		<div class="pull-left">
-			<a href="form.html" th:href="@{'/clientes/alterar/'+${cliente.id}}">alterar</a>
-			| <a href="clientes" th:href="@{'/clientes/remover/'+${cliente.id}}">remover</a>
-			| <a th:href="@{/clientes/}" href="list.html">voltar</a>
+			<a th:href="@{'/clientes/alterar/'+${cliente.id}}" class="btn btn-primary btn-block btn-lg">Alterar</a>
+			<a th:href="@{'/clientes/remover/'+${cliente.id}}" class="btn btn-danger btn-block btn-lg">Remover</a>
+			<a th:href="@{/clientes/}" class="btn btn-secondary btn-block btn-lg">Voltar</a>
 		</div>
 		
 	</div>
