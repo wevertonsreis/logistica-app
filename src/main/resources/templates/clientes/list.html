@@ -22,12 +22,12 @@
 			</thead>
 			<tbody>
 				<tr th:if="${clientes.empty}">
-					<td colspan="3">Sem clientes</td>
+					<td colspan="2">Sem clientes</td>
 				</tr>
 				
 				<tr th:each="cliente : ${clientes}">
-					<th scope="row" th:text="${cliente.id}">1</th>
-					<td><a href="view.html" th:href="@{'/clientes/'+${cliente.id}}" th:text="${cliente.nome}"> nome </a></td>
+					<th scope="row" th:text="${cliente.id}"></th>
+					<td><a th:href="@{'/clientes/'+${cliente.id}}" th:text="${cliente.nome}"></a></td>
 				</tr>
 			</tbody>
 		</table>

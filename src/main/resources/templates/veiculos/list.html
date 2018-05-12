@@ -9,6 +9,8 @@
 	
 	<div layout:fragment="content">
 		
+		<a th:href="@{/veiculos/novo}" class="btn btn-primary btn-lg active btn-block mb-1" role="button" aria-pressed="true">Novo veículo</a>
+		
 		<table class="table">
 			<thead class="thead-light">
 				<tr>
@@ -18,7 +20,7 @@
 			</thead>
 			<tbody>
 				<tr th:if="${veiculos.empty}">
-					<td colspan="3">Sem veículos</td>
+					<td colspan="2">Sem veículos</td>
 				</tr>
 				
 				<tr th:each="veiculo : ${veiculos}">

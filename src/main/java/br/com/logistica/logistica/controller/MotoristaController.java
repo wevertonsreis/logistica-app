@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.logistica.logistica.entity.Veiculo;
-import br.com.logistica.logistica.repository.VeiculoRepository;
+import br.com.logistica.logistica.entity.Motorista;
+import br.com.logistica.logistica.repository.MotoristaRepository;
 
 @Controller
-@RequestMapping("/veiculos")
-public class VeiculoController {
+@RequestMapping("/motoristas")
+public class MotoristaController {
 
-	private final String VEICULO_URI = "veiculos/";
+	private final String MOTORISTA_URI = "motoristas/";
 	
 	@Autowired
-	private VeiculoRepository veiculoRepository;
+	private MotoristaRepository motoristaRepository;
 	
 	@GetMapping("/")
 	public ModelAndView list() {
-		List<Veiculo> veiculos = this.veiculoRepository.findAll();
-		return new ModelAndView(VEICULO_URI + "list", "veiculos", veiculos);
+		List<Motorista> motoristas = motoristaRepository.findAll();
+		return new ModelAndView(MOTORISTA_URI + "list", "motoristas", motoristas);
 	}
 	
 	@GetMapping("/novo")
-	public String createForm(@ModelAttribute Veiculo veiculo) {
-		return VEICULO_URI + "form";
+	public String createForm(@ModelAttribute Motorista motorista) {
+		return MOTORISTA_URI + "form";
 	}
 	
 }
