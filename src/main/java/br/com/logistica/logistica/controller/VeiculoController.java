@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.logistica.logistica.entity.Veiculo;
+import br.com.logistica.logistica.repository.MotoristaRepository;
 import br.com.logistica.logistica.repository.VeiculoRepository;
 
 @Controller
@@ -20,6 +22,8 @@ public class VeiculoController {
 	
 	@Autowired
 	private VeiculoRepository veiculoRepository;
+	@Autowired
+	private MotoristaRepository motoristaRepository;
 	
 	@GetMapping("/")
 	public ModelAndView list() {
@@ -28,8 +32,16 @@ public class VeiculoController {
 	}
 	
 	@GetMapping("/novo")
-	public String createForm(@ModelAttribute Veiculo veiculo) {
-		return VEICULO_URI + "form";
+	public ModelAndView createForm(@ModelAttribute Veiculo veiculo) {
+		ModelAndView modelAndView = new ModelAndView(VEICULO_URI + "form", "veiculo", veiculo);
+		modelAndView.addObject("motoristas", motoristaRepository.findAll());
+		return modelAndView;
+	}
+	
+	@PostMapping(params = "form")
+	public ModelAndView create(Veiculo veiculo) {
+		veiculo = this.veiculoRepository.save(veiculo);
+		return new ModelAndView("redirect:/" + VEICULO_URI +"{veiculo.id}", "veiculo.id", veiculo.getId());	
 	}
 	
 }

@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	layout:decorate="~{layout}">
 <head>
-	<title>VeÃ­culos</title>
+	<title>Veículos</title>
 </head>
 <body>
-	<h1 layout:fragment="header">Lista de VeÃ­culos</h1>
+	<h1 layout:fragment="header">Lista de Veículos</h1>
 	
 	<div layout:fragment="content">
 		
@@ -20,12 +20,12 @@
 			</thead>
 			<tbody>
 				<tr th:if="${veiculos.empty}">
-					<td colspan="2">Sem veÃ­culos</td>
+					<td colspan="2">Sem veículos</td>
 				</tr>
 				
 				<tr th:each="veiculo : ${veiculos}">
 					<th scope="row" th:text="${veiculo.id}">1</th>
-					<td><a th:href="@{'/veiculos/'+${veiculo.id}}" th:text="${veiculonome}"></a></td>
+					<td><a th:href="@{'/veiculos/'+${veiculo.id}}" th:text="${veiculo.placa}"></a></td>
 				</tr>
 			</tbody>
 		</table>

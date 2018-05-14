@@ -9,7 +9,18 @@
 	
 	<h1 layout:fragment="header">Motorista</h1>
 	<div layout:fragment="content">
-	
+		
+		<form id="motoristaForm" th:action="@{/motoristas/(form)}" th:object="${motorista}" action="#" method="post">
+			
+			<div class="form-group">
+				<label for="motoristaNome">Nome:</label>
+				<input id="motoristaNome" class="form-control" type="text" th:field="*{nome}" placeholder="Nome">
+			</div>
+			
+			<button type="submit" class="btn btn-primary btn-block btn-lg">Gravar</button>
+			<a th:href="@{/motoristas/}" class="btn btn-secondary btn-block btn-lg">Voltar</a>
+		
+		</form>
 	</div>
 	
 </body>
