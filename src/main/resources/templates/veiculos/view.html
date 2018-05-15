@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Veículo</title>
+</head>
+<body>
+	
+	<h1 layout:fragment="header">Veículo</h1>
+	
+	<div layout:fragment="content">
+		
+		<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}"></div>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Placa</th>
+					<th>Motorista</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="id" th:text="${veiculo.id}"></td>
+					<td id="nome" th:text="${veiculo.placa}"></td>
+					<td id="endereco" th:text="${veiculo.motorista.nome}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div class="pull-left">
+			<a th:href="@{'/veiculos/alterar/'+${veiculo.id}}" class="btn btn-primary btn-block btn-lg">Alterar</a>
+			<a th:href="@{'/veiculos/remover/'+${veiculo.id}}" class="btn btn-danger btn-block btn-lg">Remover</a>
+			<a th:href="@{/veiculos/}" class="btn btn-secondary btn-block btn-lg">Voltar</a>
+		</div>
+		
+	</div>
+	
+</body>
+
+</html>
