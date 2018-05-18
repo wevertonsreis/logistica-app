@@ -38,6 +38,11 @@ public class VeiculoController {
 		return new ModelAndView(VEICULO_URI + "view", "veiculo", veiculo);
 	}
 	
+	@GetMapping("localizar/{id}")
+	public ModelAndView localizar(@PathVariable("id") Veiculo veiculo) {
+		return new ModelAndView(VEICULO_URI + "mapa", "veiculo", veiculo);
+	}
+	
 	@GetMapping("/novo")
 	public ModelAndView createForm(@ModelAttribute Veiculo veiculo) {
 		ModelAndView modelAndView = new ModelAndView(VEICULO_URI + "form", "veiculo", veiculo);

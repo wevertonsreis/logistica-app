@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Veículo</title>
+	<style>
+      #map {
+        width: 100%;
+        height: 400px;
+        background-color: grey;
+      }
+    </style>
+</head>
+<body>
+	<h1 layout:fragment="header">Localização do Veículo</h1>
+	
+	<div layout:fragment="content">
+		
+    	<div id="map"></div>
+    
+	    <script>
+	    
+			function initMap() {
+			   
+				var uluru = {lat: 37.772, lng: -122.214};
+			   
+			   var map = new google.maps.Map(document.getElementById('map'), {
+			     zoom: 16,
+			     center: uluru
+			   });
+			   
+			   var marker = new google.maps.Marker({
+			     position: uluru,
+			     map: map,
+			     icon: "../../car.png",
+			   });
+			   
+			   var flightPlanCoordinates = [
+				      {lat: 37.771582, lng: -122.213223},
+			          {lat: 37.770513, lng: -122.211039},
+			        ];
+		        
+				var flightPath = new google.maps.Polyline({
+		          path: flightPlanCoordinates,
+		          geodesic: true,
+		          strokeColor: '#FF0000',
+		          strokeOpacity: 1.0,
+		          strokeWeight: 2
+		        });
+			 	
+				flightPath.setMap(map);
+			}
+			
+			
+			
+			
+			
+			
+			
+	    </script>
+	    
+	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1VK7EWgayjTcC6i8LAOV887RauWIKLAk&callback=initMap"></script>
+		
+	</div>
+	
+</body>
+
+</html>
