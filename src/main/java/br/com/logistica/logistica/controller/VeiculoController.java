@@ -20,7 +20,10 @@ import br.com.logistica.logistica.repository.VeiculoRepository;
 @RequestMapping("/veiculos")
 public class VeiculoController {
 
-	private final String VEICULO_URI = "veiculos/";
+	private static final String PAGINA_LIST = "veiculos/list";
+	private static final String PAGINA_FORM = "veiculos/form";
+	private static final String PAGINA_VIEW = "veiculos/view";
+	private static final String PAGINA_MAPA = "veiculos/mapa";
 	
 	@Autowired
 	private VeiculoRepository veiculoRepository;
@@ -30,29 +33,29 @@ public class VeiculoController {
 	@GetMapping("/")
 	public ModelAndView list() {
 		List<Veiculo> veiculos = this.veiculoRepository.findAll();
-		return new ModelAndView(VEICULO_URI + "list", "veiculos", veiculos);
+		return new ModelAndView(PAGINA_LIST, "veiculos", veiculos);
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView view(@PathVariable("id") Veiculo veiculo) {
-		return new ModelAndView(VEICULO_URI + "view", "veiculo", veiculo);
+		return new ModelAndView(PAGINA_VIEW, "veiculo", veiculo);
 	}
 	
 	@GetMapping("localizar/{id}")
 	public ModelAndView localizar(@PathVariable("id") Veiculo veiculo) {
-		return new ModelAndView(VEICULO_URI + "mapa", "veiculo", veiculo);
+		return new ModelAndView(PAGINA_MAPA, "veiculo", veiculo);
 	}
 	
 	@GetMapping("/novo")
 	public ModelAndView createForm(@ModelAttribute Veiculo veiculo) {
-		ModelAndView modelAndView = new ModelAndView(VEICULO_URI + "form", "veiculo", veiculo);
+		ModelAndView modelAndView = new ModelAndView(PAGINA_FORM);
 		modelAndView.addObject("motoristas", motoristaRepository.findAll());
 		return modelAndView;
 	}
 	
 	@GetMapping("alterar/{id}")
 	public ModelAndView alterarForm(@PathVariable("id") Veiculo veiculo) {
-		return new ModelAndView(VEICULO_URI + "form", "veiculo", veiculo);
+		return new ModelAndView(PAGINA_FORM, "veiculo", veiculo);
 	}
 	
 	@PostMapping(params = "form")
@@ -60,7 +63,7 @@ public class VeiculoController {
 		veiculo = this.veiculoRepository.save(veiculo);
 		redirect.addFlashAttribute("globalMessage", "Veículo gravado com sucesso");
 		
-		return new ModelAndView("redirect:/" + VEICULO_URI +"{veiculo.id}", "veiculo.id", veiculo.getId());	
+		return new ModelAndView("redirect:/veiculos/{veiculo.id}", "veiculo.id", veiculo.getId());	
 	}
 	
 	@GetMapping("remover/{id}")
@@ -69,7 +72,7 @@ public class VeiculoController {
 		
 		List<Veiculo> veiculos = this.veiculoRepository.findAll();
 		
-		ModelAndView mv = new ModelAndView(VEICULO_URI + "list", "clientes", veiculos);
+		ModelAndView mv = new ModelAndView(PAGINA_LIST, "clientes", veiculos);
 		mv.addObject("globalMessage", "Veículo removido com sucesso");
 		
 		return mv;

@@ -22,7 +22,9 @@ import br.com.logistica.logistica.repository.ClienteRepository;
 @RequestMapping("/clientes")
 public class ClienteController {
 	
-	private final String CLIENTE_URI = "clientes/";
+	private static final String PAGINA_LIST = "clientes/list";
+	private static final String PAGINA_FORM = "clientes/form";
+	private static final String PAGINA_VIEW = "clientes/view";
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -30,33 +32,33 @@ public class ClienteController {
 	@GetMapping("/")
 	public ModelAndView list() {
 		List<Cliente> clientes = this.clienteRepository.findAll();
-		return new ModelAndView(CLIENTE_URI + "list", "clientes", clientes);
+		return new ModelAndView(PAGINA_LIST, "clientes", clientes);
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView view(@PathVariable("id") Cliente cliente) {
-		return new ModelAndView(CLIENTE_URI + "view", "cliente", cliente);
+		return new ModelAndView(PAGINA_VIEW, "cliente", cliente);
 	}
 	
 	@GetMapping("/novo")
 	public String createForm(@ModelAttribute Cliente cliente) {
-		return CLIENTE_URI + "form";
+		return PAGINA_FORM;
 	}
 	
 	@PostMapping(params = "form")
 	public ModelAndView create(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors())
-			return new ModelAndView(CLIENTE_URI + "form","formErrors",result.getAllErrors()); 
+			return new ModelAndView(PAGINA_FORM,"formErrors",result.getAllErrors()); 
 			
 		cliente = this.clienteRepository.save(cliente);
 		redirect.addFlashAttribute("globalMessage", "Cliente gravado com sucesso");
 		
-		return new ModelAndView("redirect:/" + CLIENTE_URI +"{cliente.id}", "cliente.id", cliente.getId());	
+		return new ModelAndView("redirect:/clientes/{cliente.id}", "cliente.id", cliente.getId());	
 	}
 	
 	@GetMapping("alterar/{id}")
 	public ModelAndView alterarForm(@PathVariable("id") Cliente cliente) {
-		return new ModelAndView(CLIENTE_URI + "form", "cliente", cliente);
+		return new ModelAndView(PAGINA_FORM, "cliente", cliente);
 	}
 	
 	@GetMapping("remover/{id}")
@@ -65,7 +67,7 @@ public class ClienteController {
 		
 		List<Cliente> clientes = this.clienteRepository.findAll();
 		
-		ModelAndView mv = new ModelAndView(CLIENTE_URI + "list", "clientes", clientes);
+		ModelAndView mv = new ModelAndView(PAGINA_LIST, "clientes", clientes);
 		mv.addObject("globalMessage", "Cliente removido com sucesso");
 		
 		return mv;

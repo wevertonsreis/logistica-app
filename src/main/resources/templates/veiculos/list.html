@@ -6,11 +6,11 @@
 	<title>Veículos</title>
 </head>
 <body>
-	<h1 layout:fragment="header">Lista de Veículos</h1>
+	<h1 layout:fragment="header">Veículos</h1>
 	
 	<div layout:fragment="content">
 		
-		<a th:href="@{/veiculos/novo}" class="btn btn-primary btn-lg active btn-block mb-1" role="button" aria-pressed="true">Novo veículo</a>
+		<a th:href="@{/veiculos/novo}" class="btn btn-primary btn-lg active btn-block mb-1" role="button" aria-pressed="true">Novo</a>
 		
 		<table class="table">
 			<thead class="thead-light">
@@ -27,9 +27,9 @@
 				</tr>
 				
 				<tr th:each="veiculo : ${veiculos}">
-					<th scope="row" th:text="${veiculo.id}">1</th>
+					<th scope="row" th:text="${veiculo.id}"></th>
 					<td><a th:href="@{'/veiculos/'+${veiculo.id}}" th:text="${veiculo.placa}"></a></td>
-					<td><a th:href="@{'/motoristas/'+${veiculo.motorista.id}}" th:text="${veiculo.motorista.nome}"></a></td>
+					<td><a th:href="@{'/veiculos/'+${veiculo.id}}" th:text="${veiculo.motorista.nome}"></a></td>
 					<td><a th:href="@{'/veiculos/localizar/'+${veiculo.id}}">Localizar</a></td>
 				</tr>
 			</tbody>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Pedidos</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Lista de Pedidos</h1>
+	
+	<div layout:fragment="content">
+		
+		<a th:href="@{/pedidos/novo}" class="btn btn-primary btn-lg active btn-block mb-1" role="button" aria-pressed="true">Novo</a>
+		
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Cliente</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${pedidos.empty}">
+					<td colspan="2">Sem pedidos</td>
+				</tr>
+				
+				<tr th:each="pedido : ${pedidos}">
+					<th scope="row" th:text="${pedido.id}">1</th>
+					<td><a th:href="@{'/pedidos/'+${pedido.id}}" th:text="${pedido.cliente.nome}"></a></td>			
+				</tr>
+				
+			</tbody>
+		</table>
+		
+	</div>
+	
+</body>
+
+</html>
+		

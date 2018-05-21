@@ -19,7 +19,9 @@ import br.com.logistica.logistica.repository.MotoristaRepository;
 @RequestMapping("/motoristas")
 public class MotoristaController {
 
-	private final String MOTORISTA_URI = "motoristas/";
+	private static final String PAGINA_LIST = "motoristas/list";
+	private static final String PAGINA_FORM = "motoristas/form";
+	private static final String PAGINA_VIEW = "motoristas/view";
 	
 	@Autowired
 	private MotoristaRepository motoristaRepository;
@@ -27,22 +29,22 @@ public class MotoristaController {
 	@GetMapping("/")
 	public ModelAndView list() {
 		List<Motorista> motoristas = motoristaRepository.findAll();
-		return new ModelAndView(MOTORISTA_URI + "list", "motoristas", motoristas);
+		return new ModelAndView(PAGINA_LIST, "motoristas", motoristas);
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView view(@PathVariable("id") Motorista motorista) {
-		return new ModelAndView(MOTORISTA_URI + "view", "motorista", motorista);
+		return new ModelAndView(PAGINA_VIEW, "motorista", motorista);
 	}
 	
 	@GetMapping("/novo")
 	public String createForm(@ModelAttribute Motorista motorista) {
-		return MOTORISTA_URI + "form";
+		return PAGINA_FORM;
 	}
 	
 	@GetMapping("alterar/{id}")
 	public ModelAndView alterarForm(@PathVariable("id") Motorista motorista) {
-		return new ModelAndView(MOTORISTA_URI + "form", "motorista", motorista);
+		return new ModelAndView(PAGINA_FORM, "motorista", motorista);
 	}
 	
 	@PostMapping(params = "form")
@@ -50,7 +52,7 @@ public class MotoristaController {
 		motorista = this.motoristaRepository.save(motorista);
 		redirect.addFlashAttribute("globalMessage", "Motorista gravado com sucesso");
 		
-		return new ModelAndView("redirect:/" + MOTORISTA_URI +"{motorista.id}", "motorista.id", motorista.getId());	
+		return new ModelAndView("redirect:/motoristas/{motorista.id}", "motorista.id", motorista.getId());	
 	}
 	
 	@GetMapping("remover/{id}")
@@ -59,7 +61,7 @@ public class MotoristaController {
 		
 		List<Motorista> motorista = this.motoristaRepository.findAll();
 		
-		ModelAndView mv = new ModelAndView(MOTORISTA_URI + "list", "motoristas", motorista);
+		ModelAndView mv = new ModelAndView(PAGINA_LIST, "motoristas", motorista);
 		mv.addObject("globalMessage", "Motorista removido com sucesso");
 		
 		return mv;
