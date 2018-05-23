@@ -10,7 +10,27 @@
 	<h1 layout:fragment="header">Entregas</h1>
 	
 	<div layout:fragment="content">
-	
+		
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Pedido</th>
+					<th scope="col">Veículo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${entregas.empty}">
+					<td colspan="2">Sem entregas</td>
+				</tr>
+				<tr th:each="entrega : ${entregas}">
+					<th scope="row" th:text="${entrega.id}"></th>
+					<td th:text="${entrega.pedido.id}"></td>
+					<td th:text="${entrega.veiculo.placa}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
 	</div>
 	
 </body>

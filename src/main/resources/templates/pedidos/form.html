@@ -11,7 +11,7 @@
 	<div layout:fragment="content">
 		
 		<form id="veiculoForm" th:action="@{/pedidos/(form)}" th:object="${pedido}" action="#" method="post">
-				
+			
 			<div class="form-group">
 				<label for="pedidoCliente">Cliente:</label>
 				<select id="pedidoCliente" th:field="*{cliente}" class="form-control">

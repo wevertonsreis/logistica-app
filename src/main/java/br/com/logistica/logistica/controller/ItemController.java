@@ -8,22 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.logistica.logistica.entity.Entrega;
-import br.com.logistica.logistica.repository.EntregaRepository;
+import br.com.logistica.logistica.entity.Item;
+import br.com.logistica.logistica.repository.ItemRepository;
 
 @Controller
-@RequestMapping("/entregas")
-public class EntregaController {
-	
-	private static final String PAGINA_LIST = "entregas/list";
-	
+@RequestMapping("/itens")
+public class ItemController {
+
 	@Autowired
-	private EntregaRepository entregaRepository;
+	private ItemRepository itemRepository;
 	
 	@GetMapping("/")
 	public ModelAndView list() {
-		List<Entrega> entregas = entregaRepository.findAll();
-		return new ModelAndView(PAGINA_LIST, "entregas", entregas);
+		List<Item> itens = itemRepository.findAll();
+		return new ModelAndView("itens/list", "itens", itens);
 	}
 	
 }

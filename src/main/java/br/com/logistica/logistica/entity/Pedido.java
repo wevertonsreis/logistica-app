@@ -13,8 +13,16 @@ public class Pedido extends GenericEntity {
 	@ManyToOne
 	private Cliente cliente;
 	@OneToMany
-	@JoinColumn(name = "pedido_id", referencedColumnName = "id")
-	private List<Item> itens;
+	@JoinColumn(name = "pedido_id", referencedColumnName = "id")	
+	private List<PedidoItem> itens;
+	
+	public List<PedidoItem> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<PedidoItem> itens) {
+		this.itens = itens;
+	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -24,12 +32,5 @@ public class Pedido extends GenericEntity {
 		this.cliente = cliente;
 	}
 
-	public List<Item> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<Item> itens) {
-		this.itens = itens;
-	}
 	
 }
