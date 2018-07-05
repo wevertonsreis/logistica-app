@@ -8,42 +8,24 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
-public class Veiculo extends GenericEntity {
+public class Veiculo extends GenericEntity<Long> {
 	
+	@Getter @Setter
 	private String placa;
 	
 	@ManyToOne
+	@Getter @Setter
 	private Motorista motorista;
 	
 	@ManyToMany
 	@JoinTable(name = "vaiculo_localizacao", 
 		joinColumns = { @JoinColumn(name = "veiculo_id") }, 
 		inverseJoinColumns = { @JoinColumn(name = "localizacao_id") })
+	@Getter @Setter
 	private List<Localizacao> localizacoes;
-	
-	public String getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
-	public Motorista getMotorista() {
-		return motorista;
-	}
-
-	public void setMotorista(Motorista motorista) {
-		this.motorista = motorista;
-	}
-
-	public List<Localizacao> getLocalizacoes() {
-		return localizacoes;
-	}
-
-	public void setLocalizacoes(List<Localizacao> localizacoes) {
-		this.localizacoes = localizacoes;
-	}
-	
+		
 }

@@ -7,30 +7,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
-public class Pedido extends GenericEntity {
+public class Pedido extends GenericEntity<Long> {
 	
 	@ManyToOne
+	@Getter @Setter
 	private Cliente cliente;
+	
 	@OneToMany
 	@JoinColumn(name = "pedido_id", referencedColumnName = "id")	
+	@Getter @Setter
 	private List<PedidoItem> itens;
-	
-	public List<PedidoItem> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<PedidoItem> itens) {
-		this.itens = itens;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	
 }

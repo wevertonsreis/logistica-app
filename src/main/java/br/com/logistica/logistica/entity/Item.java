@@ -4,26 +4,16 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
-public class Item extends GenericEntity {
-
+public class Item extends GenericEntity<Long> {
+	
+	@Getter @Setter
 	private String nome;
+	
+	@Getter @Setter
 	private BigDecimal valor;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
 
 }
